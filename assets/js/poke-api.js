@@ -15,7 +15,10 @@ function convertPokeApiDetailToPokemon(pokemonDetail){
   pokemon.type = type
 
   pokemon.photo = pokemonDetail.sprites.other.dream_world.front_default
-
+  const status = pokemonDetail.stats.map((stats) => stats.base_stat)
+ 
+  pokemon.stats = status
+  
   return pokemon
 }
 
@@ -33,7 +36,7 @@ pokeAPI.getPokemons = (offset = 0, limit = 5) => {
     .then((pokemons) => pokemons.map(pokeAPI.getPokemonsDetail))
     .then((detailRequests) => Promise.all(detailRequests))
     .then ((pokemonDetails) => pokemonDetails)
-    }
+  }
 
 
 
